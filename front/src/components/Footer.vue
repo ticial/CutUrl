@@ -2,12 +2,12 @@
 
 <template>
     <footer class="container footer mt-5">
-        <p>Все права защищены ©</p>
-        <div class="social-links">
+        <p>© 2023 MikulanDev</p>
+        <!-- <div class="social-links">
             <img src="/img/vk.svg">
             <img src="/img/youtube.svg">
             <img src="/img/square-twitter.svg">
-        </div>
+        </div> -->
     </footer>
 </template>
 
@@ -34,10 +34,11 @@
 
 .footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-top: 16px;
     padding-bottom: 16px;
+    height: 32px;
     background: var(--silver2-color);
     border-top: 2px solid var(--silver1-color);
 }
