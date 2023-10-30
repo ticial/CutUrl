@@ -1,6 +1,6 @@
 <script>
-import InputBlock from '../components/InputBlock'
-import LinkList from '../components/LinkList'
+import InputBlock from '../components/InputBlock.vue'
+import LinkList from '../components/LinkList.vue'
 import axios from 'axios'
 
 export default {
@@ -72,19 +72,25 @@ export default {
 
 <template>
     <main>
-        <p v-if="!$store.state.isAuthenticated" class="center">Только авторизованные пользователи могут сокращать
-                ссылки. <RouterLink to="/login" class="hover-underline">Войти?</RouterLink>
+        <p v-if="!$store.state.isAuthenticated"
+           class="center">Только авторизованные пользователи могут сокращать
+            ссылки. <RouterLink to="/login"
+                        class="hover-underline">Войти?</RouterLink>
         </p>
-        <form v-else class="centered-container-flex">
+        <form v-else
+              class="centered-container-flex">
             <h2 class="center">Сократитель ссылок</h2>
 
             <InputBlock :field="fields.original_link"></InputBlock>
 
             <InputBlock :field="fields.pseudo_link"></InputBlock>
-            
-            <button type="button" @click="submitForm" class="mt-4">Создать</button>
+
+            <button type="button"
+                    @click="submitForm"
+                    class="mt-4">Создать</button>
         </form>
-        <LinkList v-if="$store.state.isAuthenticated" ref="LinkList" :baseURL="baseURL"></LinkList>
-        
-    </main>
-</template>
+        <LinkList v-if="$store.state.isAuthenticated"
+              ref="LinkList"
+              :baseURL="baseURL"></LinkList>
+
+</main></template>
