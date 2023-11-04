@@ -9,11 +9,6 @@ from .models import Link
 from .serializers import LinkSerializer
 
 
-# В документации djoser'а есть другой способ изменить данные пользователя, 
-# но там нужно менять каждое поле отдельными вызовами.
-# Да и, как я понимаю, менять данные, которые используются при авторизации
-# в нормальных проектах лучше вообще не позволять пользователям.
-# Поэтому меняем руками и отправляем ошибки сами.
 class UpdateUser(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -26,7 +21,7 @@ class UpdateUser(APIView):
             return Response({'result': 'user updated'})
         except ValidationError as e:
             return Response(e.message_dict, status=400, exception=True)
-                
+
 
 class LinkView(APIView):
     permission_classes = [IsAuthenticated]
@@ -43,7 +38,7 @@ class LinkView(APIView):
             return Response({'result': 'link created'})
         except ValidationError as e:
             return Response(e.message_dict, status=400, exception=True)
-    
+
     # Удаляем ссылку по slug
     def delete(self, req, *args, **kwargs):
         print('LinkView.delete', req.data, kwargs)
@@ -59,8 +54,9 @@ class GetUserLinks(ModelViewSet):
     serializer_class = LinkSerializer
 
     def get_queryset(self):
-        return Link.objects.filter(user=self.request.user).order_by('-id') # Сортируем по убыванию, чтобы сверху были самые новые
-            
+        # Сортируем по убыванию, чтобы сверху были самые новые
+        return Link.objects.filter(user=self.request.user).order_by('-id')
+
 
 # перенаправляем наши ссылки и считаем переходы
 def redirect_and_count(req, slug):
