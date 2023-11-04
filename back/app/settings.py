@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
 import os
+import environ
 
-ENV_CONFIG = load_dotenv()
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,11 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = env('SECRET_KEY')
 # SECRET_KEY = 'django-insecure-u8nu2tmvu)pzqd9l*9z8sp)-=^e3*ekm8ezlz!&ksdc4hd7!&f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # os.environ['DEBUG']
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']
 
@@ -63,7 +66,7 @@ REST_FRAMEWORK = {
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    os.environ['ALLOWED_ORIGIN']
+    env('ALLOWED_ORIGIN')
 ]
 
 MIDDLEWARE = [
